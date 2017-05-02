@@ -35,7 +35,7 @@ function retrieveActiveRecipesFromServer(url, operation) {
 				populateRecipesView('recipes', returnValues);
 			}
 			else if (operation == "gList") {
-				populateListItems('tasks', returnValues);				
+				populateListItems('recipes', returnValues);				
 			}
 		}
 	}
@@ -93,13 +93,12 @@ function populateListItems2(elementId, recipe) {
 
 //JQuery based function
 function populateListItems(elementId, recipe) {
-	var recipeItems = recipe.tasks;
 	var newElement = "";
 
-	for (var i = 0; i < recipeItems.length; i++) {
+	for (var i = 0; i < recipe.length; i++) {
 		newElement += "<tr>";
-		newElement += "<td>" + recipeItems[i].description + "</td>";
-		newElement += "<td><span class=\"badge\">" + recipeItems[i].shared + "</span></td>";
+		newElement += "<td>" + recipe.instructions + "</td>";
+		newElement += "<td><span class=\"badge\">" + recipe.carbs + "</span></td>";
 		newElement += "<td>";
 		newElement += "<div class=\"input-group\">";
 		newElement += "<span class=\"input-group-addon\" style=\"border-style:none;\">";

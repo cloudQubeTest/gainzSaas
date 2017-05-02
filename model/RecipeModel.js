@@ -11,9 +11,9 @@ var RecipeModel = (function () {
     RecipeModel.prototype.createSchema = function () {
         this.schema = mongoose.Schema({
             recipeTitle: String,
-            recipeID: Number,
+            recipeId: Number,
             ingredients: String,
-            instructions: Number,
+            instructions: String,
             calories: Number,
             protein: Number,
             fat: Number,
@@ -26,6 +26,12 @@ var RecipeModel = (function () {
     };
     RecipeModel.prototype.retrieveAllRecipes = function (response) {
         var query = this.model.find({});
+        query.exec(function (err, itemArray) {
+            response.json(itemArray);
+        });
+    };
+    RecipeModel.prototype.retrieveSingleRecipe = function (response, filter) {
+        var query = this.model.findOne(filter);
         query.exec(function (err, itemArray) {
             response.json(itemArray);
         });

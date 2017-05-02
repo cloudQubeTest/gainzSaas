@@ -18,9 +18,9 @@ export default class RecipeModel {
         this.schema =  mongoose.Schema(
             {
                 recipeTitle: String,
-                recipeID: Number,
+                recipeId: Number,
                 ingredients: String,
-                instructions: Number,
+                instructions: String,
                 calories: Number,
                 protein: Number,
                 fat: Number,
@@ -38,6 +38,13 @@ export default class RecipeModel {
         var query = this.model.find({});
         query.exec( (err, itemArray) => {
             response.json(itemArray) ;
+        });
+    }
+
+    public retrieveSingleRecipe(response:any, filter:Object) {
+        var query = this.model.findOne(filter);
+        query.exec( (err, itemArray) => {
+            response.json(itemArray);
         });
     }
 }

@@ -2,9 +2,9 @@ import Mongoose = require("mongoose");
 
 interface IRecipeModel extends Mongoose.Document {
     recipeTitle: string;
-    recipeID: number;
+    recipeId: number;
     ingredients: string;
-    instructions: number;
+    instructions: string;
     calories: number;
     protein: number;
     fat: number;

@@ -57,7 +57,7 @@ class App {
     router.get('/app/recipe/:recipeId', (req, res) => {
         var id = req.params.recipeId;
         console.log('Query single recipe with id: ' + id);
-        this.Tasks.retrieveTasksDetails(res, {recipeId: id});
+        this.recipes.retrieveSingleRecipe(res, {recipeId: id});
     });
 
     router.get('/app/recipe/', (req, res) => {

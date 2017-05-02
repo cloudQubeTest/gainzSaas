@@ -44,7 +44,7 @@ var App = (function () {
         router.get('/app/recipe/:recipeId', function (req, res) {
             var id = req.params.recipeId;
             console.log('Query single recipe with id: ' + id);
-            _this.Tasks.retrieveTasksDetails(res, { recipeId: id });
+            _this.recipes.retrieveSingleRecipe(res, { recipeId: id });
         });
         router.get('/app/recipe/', function (req, res) {
             console.log('Query All recipe');
