@@ -3,25 +3,25 @@ function initXHR(x, value) {
 	if (x == 'home') {
 		document.getElementById("home").style.display = "block";
 		document.getElementById("recipes").style.display = "none";
-		document.getElementById("gList").style.display = "none";
+		document.getElementById("sRecipe").style.display = "none";
 	}
 	else if (x == 'recipes') {
 		//		retrieveActiveRecipesFromServer('/app/json/recipes.json');
 		retrieveActiveRecipesFromServer('/app/recipe/', 'recipes');
 		document.getElementById("home").style.display = "none";
 		document.getElementById("recipes").style.display = "block";
-		document.getElementById("gList").style.display = "none";		
+		document.getElementById("sRecipe").style.display = "none";		
 	}
-	else if (x == 'gList') {
-		retrieveActiveRecipesFromServer('/app/recipe/' + value, 'gList');
+	else if (x == 'sRecipe') {
+		retrieveActiveRecipesFromServer('/app/recipe/' + value, 'sRecipe');
 		document.getElementById("home").style.display = "none";
 		document.getElementById("recipes").style.display = "none";
-		document.getElementById("gList").style.display = "block";
+		document.getElementById("sRecipe").style.display = "block";
 	}
 	else {
 		document.getElementById("home").style.display = "block";
 		document.getElementById("recipes").style.display = "none";
-		document.getElementById("gList").style.display = "none";
+		document.getElementById("sRecipe").style.display = "none";
 	}
 }
 
@@ -34,8 +34,8 @@ function retrieveActiveRecipesFromServer(url, operation) {
 			if (operation == "recipes") {
 				populateRecipesView('recipes', returnValues);
 			}
-			else if (operation == "gList") {
-				populateListItems('recipes', returnValues);				
+			else if (operation == "sRecipe") {
+				populateReceipeDetails('details', returnValues);				
 			}
 		}
 	}
@@ -50,7 +50,7 @@ function populateRecipesView(elementId, recipes) {
 
 	for (var i = 0; i < recipes.length; i++) {
 		newElement += "<div class=\"panel panel-default\">";
-		newElement += "<h4 class=\"panel-heading\"><a href=\"javascript:initXHR('gList'," +  (i+1) + ")\">" + (i + 1) + ". " + recipes[i].recipeTitle + "</a></h4>";
+		newElement += "<h4 class=\"panel-heading\"><a href=\"javascript:initXHR('sRecipe'," +  (i+1) + ")\">" + (i + 1) + ". " + recipes[i].recipeTitle + "</a></h4>";
 		newElement += "<div class=\"panel-body\">";
 		newElement += "<p>" + recipes[i].ingredients  + "</p>";
 		newElement += "</div>";
@@ -69,15 +69,13 @@ function populateRecipesView(elementId, recipes) {
 }
 
 //DOM based function
-function populateListItems2(elementId, recipe) {
-	var recipeItems = recipe.tasks;
+function populateReceipeDetails(elementId, recipe) {
 	var element = document.getElementById(elementId);
 	var newElement = "";
 
-	for (var i = 0; i < recipeItems.length; i++) {
 		newElement += "<tr>";
-		newElement += "<td>" + recipeItems[i].description + "</td>";
-		newElement += "<td><span class=\"badge\">" + recipeItems[i].shared + "</span></td>";
+		newElement += "<td>" + recipe.instructions + "</td>";
+		newElement += "<td><span class=\"badge\">" + recipe.sugar + "</span></td>";
 		newElement += "<td>";
 		newElement += "<div class=\"input-group\">";
 		newElement += "<span class=\"input-group-addon\" style=\"border-style:none;\">";
@@ -86,16 +84,13 @@ function populateListItems2(elementId, recipe) {
 		newElement += "</div>";
 		newElement += "</td>";
 		newElement += "</tr>";
-	}
 
 	element.innerHTML = newElement;	
 }
 
 //JQuery based function
-function populateListItems(elementId, recipe) {
+function populateListItems2(elementId, recipe) {
 	var newElement = "";
-
-	for (var i = 0; i < recipe.length; i++) {
 		newElement += "<tr>";
 		newElement += "<td>" + recipe.instructions + "</td>";
 		newElement += "<td><span class=\"badge\">" + recipe.carbs + "</span></td>";
@@ -107,6 +102,5 @@ function populateListItems(elementId, recipe) {
 		newElement += "</div>";
 		newElement += "</td>";
 		newElement += "</tr>";
-	}
 	$("#" + elementId).append(newElement);
 }
