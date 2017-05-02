@@ -5,6 +5,7 @@ recipesCollection.remove({})
 recipesCollection.insert(
 {
     recipeTitle: 'Matcha Smoothie',
+	recipeID: 1,
     ingredients: "1 banana, 1/2 cup of ice, 1 cup of almond milk, 1 scoop of vanilla protein powder, 2 tbsp of matcha powder, honey to taste",
     instructions: "Blend together until smooth",
     calories: 307,
@@ -18,6 +19,7 @@ recipesCollection.insert(
 recipesCollection.insert(
 {
     recipeTitle: 'Large Pepperoni Pizza',
+	recipeID: 2,
     ingredients: "Cheese, Bread, Pepperoni",
     instructions: "Throw some pepperonis on some bread and cheese and melt it",
     calories: 500,
@@ -31,6 +33,7 @@ recipesCollection.insert(
 recipesCollection.insert(
 {
     recipeTitle: 'Chicken Salad',
+	recipeID: 3,
     ingredients: "Lettuce, Chicken, Dressing",
     instructions: "Cut Lettuce and chicken, add dresssing, toss",
     calories: 250,
@@ -44,6 +47,7 @@ recipesCollection.insert(
 recipesCollection.insert(
 {
     recipeTitle: "Avocado Toast",
+	recipeID: 4,
     ingredients: "Avocado, Whole Wheat Bread, Lemon, Salt, Pepper, Smoked Salmon (Optional)",
     instructions: "Mash avocado with lemon juice, add salt and pepper. Spread on toasted whole wheat bread and top with smoked salmon.",
     calories: 300,
