@@ -48,7 +48,7 @@ var App = (function () {
         });
         router.get('/app/recipe/', function (req, res) {
             console.log('Query All recipe');
-            _this.recipes.retrieveAllrecipes(res);
+            _this.recipes.retrieveAllRecipes(res);
         });
         this.express.use('/', router);
         this.express.use('/app/json/', express.static(__dirname + '/app/json'));

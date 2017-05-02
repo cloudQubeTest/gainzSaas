@@ -62,7 +62,7 @@ class App {
 
     router.get('/app/recipe/', (req, res) => {
         console.log('Query All recipe');
-        this.recipes.retrieveAllrecipes(res);
+        this.recipes.retrieveAllRecipes(res);
     });
 
 

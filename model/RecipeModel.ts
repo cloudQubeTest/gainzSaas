@@ -1,6 +1,6 @@
 import Mongoose = require('mongoose');
 import DataAccess from '../DataAccess';
-import IListModel from '../interfaces/IRecipeModel';
+import IRecipeModel from '../interfaces/IRecipeModel';
 
 var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
