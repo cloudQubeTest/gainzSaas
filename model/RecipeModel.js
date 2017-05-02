@@ -3,30 +3,43 @@ exports.__esModule = true;
 var DataAccess_1 = require("../DataAccess");
 var mongoose = DataAccess_1["default"].mongooseInstance;
 var mongooseConnection = DataAccess_1["default"].mongooseConnection;
-var ListModel = (function () {
-    function ListModel() {
+
+var RecipeModel = (function () {
+    function RecipeModel() {
         this.createSchema();
         this.createModel();
     }
-    ListModel.prototype.createSchema = function () {
+    RecipeModel.prototype.createSchema = function () {
         this.schema = mongoose.Schema({
-            name: String,
-            description: String,
-            listId: Number,
-            due: String,
-            state: String,
-            owner: String
-        }, { collection: 'lists' });
+            recipeTitle: String,
+            recipeId: Number,
+            ingredients: String,
+            instructions: String,
+            calories: Number,
+            protein: Number,
+            fat: Number,
+            carbs: Number,
+            sugar: Number
+        }, { collection: 'recipes' });
     };
-    ListModel.prototype.createModel = function () {
-        this.model = mongooseConnection.model("Lists", this.schema);
+    RecipeModel.prototype.createModel = function () {
+        this.model = mongooseConnection.model("Recipes", this.schema);
     };
-    ListModel.prototype.retrieveAllLists = function (response) {
+    RecipeModel.prototype.retrieveAllRecipes = function (response) {
+
         var query = this.model.find({});
         query.exec(function (err, itemArray) {
             response.json(itemArray);
         });
     };
-    return ListModel;
+  
+    RecipeModel.prototype.retrieveSingleRecipe = function (response, filter) {
+        var query = this.model.findOne(filter);
+        query.exec(function (err, itemArray) {
+            response.json(itemArray);
+        });
+    };
+    return RecipeModel;
 }());
-exports["default"] = ListModel;
+exports["default"] = RecipeModel;
+

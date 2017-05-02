@@ -1,6 +1,8 @@
 import Mongoose = require('mongoose');
 import DataAccess from '../DataAccess';
-import IListModel from '../interfaces/iRecipeModel';
+
+import IRecipeModel from '../interfaces/IRecipeModel';
+
 
 var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
@@ -18,8 +20,11 @@ export default class RecipeModel {
         this.schema =  mongoose.Schema(
             {
                 recipeTitle: String,
+
+                recipeId: Number,
                 ingredients: String,
-                instructions: Number,
+                instructions: String,
+
                 calories: Number,
                 protein: Number,
                 fat: Number,
@@ -30,13 +35,24 @@ export default class RecipeModel {
     }
 
     public createModel(): void {
-        this.model = mongooseConnection.model<iRecipeModel>("recipes", this.schema);
+
+        this.model = mongooseConnection.model<IRecipeModel>("Recipes", this.schema);
     }
 
-    public retrieveAllLists(response:any): any {
+    public retrieveAllRecipes(response:any): any {
+
         var query = this.model.find({});
         query.exec( (err, itemArray) => {
             response.json(itemArray) ;
         });
     }
+
+
+    public retrieveSingleRecipe(response:any, filter:Object) {
+        var query = this.model.findOne(filter);
+        query.exec( (err, itemArray) => {
+            response.json(itemArray);
+        });
+    }
+
 }

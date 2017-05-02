@@ -3,8 +3,7 @@ exports.__esModule = true;
 var express = require("express");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
-var ListModel_1 = require("./model/ListModel");
-var TaskModel_1 = require("./model/TaskModel");
+var RecipeModel_1 = require("./model/RecipeModel");
 // Creates and configures an ExpressJS web server.
 var App = (function () {
     //Run configuration methods on the Express instance.
@@ -13,8 +12,7 @@ var App = (function () {
         this.middleware();
         this.routes();
         this.idGenerator = 100;
-        this.Lists = new ListModel_1["default"]();
-        this.Tasks = new TaskModel_1["default"]();
+        this.recipes = new RecipeModel_1["default"]();
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
@@ -26,16 +24,16 @@ var App = (function () {
     App.prototype.routes = function () {
         var _this = this;
         var router = express.Router();
-        router.get('/app/list/:listId/count', function (req, res) {
-            var id = req.params.listId;
-            console.log('Query single list with id: ' + id);
-            _this.Tasks.retrieveTasksCount(res, { listId: id });
+        router.get('/app/recipe/:recipeId/count', function (req, res) {
+            var id = req.params.recipeId;
+            console.log('Query single recipe with id: ' + id);
+            _this.Tasks.retrieveTasksCount(res, { recipeId: id });
         });
-        router.post('/app/list/', function (req, res) {
+        router.post('/app/recipe/', function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
-            jsonObj.listId = _this.idGenerator;
-            _this.Lists.model.create([jsonObj], function (err) {
+            jsonObj.recipeId = _this.idGenerator;
+            _this.recipes.model.create([jsonObj], function (err) {
                 if (err) {
                     console.log('object creation failed');
                 }
@@ -43,18 +41,19 @@ var App = (function () {
             res.send(_this.idGenerator.toString());
             _this.idGenerator++;
         });
-        router.get('/app/list/:listId', function (req, res) {
-            var id = req.params.listId;
-            console.log('Query single list with id: ' + id);
-            _this.Tasks.retrieveTasksDetails(res, { listId: id });
+        router.get('/app/recipe/:recipeId', function (req, res) {
+            var id = req.params.recipeId;
+            console.log('Query single recipe with id: ' + id);
+            _this.recipes.retrieveSingleRecipe(res, { recipeId: id });
         });
-        router.get('/app/list/', function (req, res) {
-            console.log('Query All list');
-            _this.Lists.retrieveAllLists(res);
+        router.get('/app/recipe/', function (req, res) {
+            console.log('Query All recipe');
+            _this.recipes.retrieveAllRecipes(res);
         });
         this.express.use('/', router);
         this.express.use('/app/json/', express.static(__dirname + '/app/json'));
-        this.express.use('/images', express.static(__dirname + '/img'));
+        this.express.use('/images', express.static(__dirname + '/Images'));
+        this.express.use('/styles', express.static(__dirname + '/Styles'));
         this.express.use('/', express.static(__dirname + '/pages'));
     };
     return App;
