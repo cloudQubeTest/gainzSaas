@@ -17,6 +17,6 @@ var DataAccess = (function () {
     };
     return DataAccess;
 }());
-DataAccess.DB_CONNECTION_STRING = 'mongodb://dbAdmin:test@localhost:3000/toDoSample/?authSource=admin';
+DataAccess.DB_CONNECTION_STRING = 'mongodb://dbAdmin:test@localhost:3000/recipeSample/?authSource=admin';
 DataAccess.connect();
 exports["default"] = DataAccess;
