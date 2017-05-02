@@ -1,11 +1,11 @@
 import Mongoose = require('mongoose');
 import DataAccess from '../DataAccess';
-import IListModel from '../interfaces/IListModel';
+import IListModel from '../interfaces/iRecipeModel';
 
 var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
 
-export default class ListModel {
+export default class RecipeModel {
     public schema:Mongoose.Schema;
     public model:any;
 
@@ -17,18 +17,20 @@ export default class ListModel {
     public createSchema(): void {
         this.schema =  mongoose.Schema(
             {
-                name: String,
-                description: String,
-                listId: Number,
-                due: String,
-                state: String,
-                owner: String
-            }, {collection: 'lists'}
+                recipeTitle: String,
+                ingredients: String,
+                instructions: Number,
+                calories: Number,
+                protein: Number,
+                fat: Number,
+                carbs: Number,
+                sugar: Number
+            }, {collection: 'recipes'}
         );
     }
 
     public createModel(): void {
-        this.model = mongooseConnection.model<IListModel>("Lists", this.schema);
+        this.model = mongooseConnection.model<iRecipeModel>("recipes", this.schema);
     }
 
     public retrieveAllLists(response:any): any {

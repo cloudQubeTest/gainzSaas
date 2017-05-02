@@ -1,3 +1,4 @@
+//CHANGE TO USER MODEL 
 import Mongoose = require("mongoose");
 
 interface ITaskModel extends Mongoose.Document {
